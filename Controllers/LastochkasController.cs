@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using EquipmentControl.Data;
 using EquipmentControl.Models;
 
-namespace EquipmentControl_v_0._1.Controllers
+namespace EquipmentControl.Controllers
 {
     public class LastochkasController : Controller
     {
