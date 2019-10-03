@@ -54,16 +54,29 @@ namespace EquipmentControl_v_0._1.Controllers
 
         public IActionResult LastochkasList()
         {
-            ViewBag.LastochkasList = new SelectList(_context.Lastochka, "MarIP", "TrainNumber");
+            ViewBag.LastochkasList = new SelectList(_context.Lastochka, "Id", "TrainNumber");
             return View();
         }
 
         [HttpPost]
-        public string CMDtest(string hostIP)
+        public string CMDtest(string selectedTrainID, string command)
         {
-            SSH s = new SSH();
-            s.SSHConnect(hostIP);
-            return s.SSHConnect(hostIP);
+            if (command.Equals("Show Interfaces"))
+                {
+                int TrainID = Int32.Parse(selectedTrainID);
+                var hostIP = _context.Lastochka.Find(TrainID).MarIP;
+                SSH s = new SSH();
+                s.SSHGetInterfaces(hostIP);
+                return s.SSHGetInterfaces(hostIP);
+                }
+            else
+                {
+                int TrainID = Int32.Parse(selectedTrainID);
+                var hostIP = _context.Lastochka.Find(TrainID).MarIP;
+                SSH s = new SSH();
+                s.SSHFolderInfo(hostIP);
+                return s.SSHFolderInfo(hostIP);
+                }
         }
     }
 }

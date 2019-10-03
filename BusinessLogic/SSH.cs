@@ -11,7 +11,7 @@ namespace EquipmentControl.BusinessLogic
 {
     public class SSH
     {
-        public string SSHConnect(string hostIP)
+        public string SSHGetInterfaces(string hostIP)
         {
 
             var PasswordConnection = new PasswordAuthenticationMethod("m.burtsev", "Thu-2331");
@@ -23,7 +23,27 @@ namespace EquipmentControl.BusinessLogic
             using (SshClient ssh = new SshClient(connectionInfo))
             {
                 ssh.Connect();
-                var command = ssh.RunCommand("ip a; ls -l");
+                var command = ssh.RunCommand("ip a");
+                myData = command.Result;
+                ssh.Disconnect();
+            }
+            return myData;
+
+        }
+
+        public string SSHFolderInfo(string hostIP)
+        {
+
+            var PasswordConnection = new PasswordAuthenticationMethod("m.burtsev", "Thu-2331");
+
+            string myData = null;
+
+            var connectionInfo = new ConnectionInfo(hostIP, "m.burtsev", PasswordConnection);
+
+            using (SshClient ssh = new SshClient(connectionInfo))
+            {
+                ssh.Connect();
+                var command = ssh.RunCommand("ls -l");
                 myData = command.Result;
                 ssh.Disconnect();
             }

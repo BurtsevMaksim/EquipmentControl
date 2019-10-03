@@ -13008,24 +13008,27 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\Max\\.nuget\\packages\\": {},
+    "C:\\Users\\Anabolism\\.nuget\\packages\\": {},
+    "C:\\Microsoft\\Xamarin\\NuGet\\": {},
     "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Max\\source\\repos\\EquipmentControl_v_0.1\\EquipmentControl_v_0.1.csproj",
+      "projectUniqueName": "C:\\Users\\Anabolism\\source\\repos\\EquipmentControl\\EquipmentControl_v_0.1.csproj",
       "projectName": "EquipmentControl_v_0.1",
-      "projectPath": "C:\\Users\\Max\\source\\repos\\EquipmentControl_v_0.1\\EquipmentControl_v_0.1.csproj",
-      "packagesPath": "C:\\Users\\Max\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Max\\source\\repos\\EquipmentControl_v_0.1\\obj\\",
+      "projectPath": "C:\\Users\\Anabolism\\source\\repos\\EquipmentControl\\EquipmentControl_v_0.1.csproj",
+      "packagesPath": "C:\\Users\\Anabolism\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\Anabolism\\source\\repos\\EquipmentControl\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
+        "C:\\Microsoft\\Xamarin\\NuGet\\",
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
       ],
       "configFilePaths": [
-        "C:\\Users\\Max\\AppData\\Roaming\\NuGet\\NuGet.Config",
-        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        "C:\\Users\\Anabolism\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Xamarin.Offline.config"
       ],
       "originalTargetFrameworks": [
         "netcoreapp2.1"
