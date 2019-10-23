@@ -1,21 +1,33 @@
-﻿@{
-    ViewData["Title"] = "LastochkasList";
-}
-
-<h2>LastochkasList</h2>
-
-@using (Html.BeginForm("CMDTest", "Home"))
+﻿@using (Html.BeginForm("CMDTest", "Home"))
 {
     <table>
         <tr>
             <td>
                 @Html.DropDownList("selectedTrainID", (SelectList)ViewBag.LastochkasList)
             </td>
+            <td>
+                Интерфейс:
+                <input type="text" name="Interface" />
+            </td>
+            <td>
+                Количество пакетов:
+                <input type="text" name="TCPPackets" />
+            </td>
+            <td>
+                Адрес оборудования:
+                <input type="text" name="DiscoveredIP" />
+            </td>
+            <td>
+                Адрес доступа:
+                <input type="text" name="AccessIP" />
+            </td>
         </tr>
         <tr>
             <td>
                 <input type="submit" name="command" value="Show Interfaces" />
                 <input type="submit" name="command" value="Show Home Folder" />
+                <input type="submit" name="command" value="Launch TCPDump" />
+                <input type="submit" name="command" value="Change Interface Settings" />
             </td>
         </tr>
     </table>

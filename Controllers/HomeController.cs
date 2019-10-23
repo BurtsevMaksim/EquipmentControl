@@ -15,35 +15,12 @@ namespace EquipmentControl_v_0._1.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly LastochkaContext _context;
-
-        public HomeController(LastochkaContext context)
-        {
-            _context = context;
-        }
 
         public IActionResult Index()
         {
-            return View();
-        }
+            LastochkaContext context = HttpContext.RequestServices.GetService(typeof(EquipmentControl.Data.LastochkaContext)) as LastochkaContext;
 
-        public IActionResult About()
-        {
-            ViewData["Message"] = "Your application description page.";
-
-            return View();
-        }
-
-        public IActionResult Contact()
-        {
-            ViewData["Message"] = "Your contact page.";
-
-            return View();
-        }
-
-        public IActionResult Privacy()
-        {
-            return View();
+            return View(context.GetAllLastochkas());
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
@@ -54,29 +31,48 @@ namespace EquipmentControl_v_0._1.Controllers
 
         public IActionResult LastochkasList()
         {
-            ViewBag.LastochkasList = new SelectList(_context.Lastochka, "Id", "TrainNumber");
+            LastochkaContext context = HttpContext.RequestServices.GetService(typeof(EquipmentControl.Data.LastochkaContext)) as LastochkaContext;
+            ViewBag.LastochkasList = new SelectList(context.GetAllLastochkas(), "Id", "TrainNumber");
             return View();
         }
 
-        [HttpPost]
-        public string CMDtest(string selectedTrainID, string command)
+        public string CMDtest(string selectedTrainID, string command, string Interface, string TCPPackets, string DiscoveredIP, string AccessIP)
         {
+            LastochkaContext context = HttpContext.RequestServices.GetService(typeof(EquipmentControl.Data.LastochkaContext)) as LastochkaContext;
             if (command.Equals("Show Interfaces"))
-                {
+            {
+
                 int TrainID = Int32.Parse(selectedTrainID);
-                var hostIP = _context.Lastochka.Find(TrainID).MarIP;
+                var hostIP = context.GetAllLastochkas().Find(x => x.Id == TrainID).MarIP;
                 SSH s = new SSH();
                 s.SSHGetInterfaces(hostIP);
                 return s.SSHGetInterfaces(hostIP);
-                }
-            else
-                {
+            }
+            else if (command.Equals("Show Home Folder"))
+            {
                 int TrainID = Int32.Parse(selectedTrainID);
-                var hostIP = _context.Lastochka.Find(TrainID).MarIP;
+                var hostIP = context.GetAllLastochkas().Find(x => x.Id == TrainID).MarIP;
                 SSH s = new SSH();
                 s.SSHFolderInfo(hostIP);
                 return s.SSHFolderInfo(hostIP);
-                }
+            }
+            else if (command.Equals("Launch TCPDump"))
+            {
+                int TrainID = Int32.Parse(selectedTrainID);
+                var hostIP = context.GetAllLastochkas().Find(x => x.Id == TrainID).MarIP;
+                int TCPPacketsParsed = Int32.Parse(TCPPackets);
+                SSH s = new SSH();
+                s.TCPDumpLaunch(hostIP, Interface, TCPPacketsParsed);
+                return s.TCPDumpLaunch(hostIP, Interface, TCPPacketsParsed);
+            }
+            else
+            {
+                int TrainID = Int32.Parse(selectedTrainID);
+                var hostIP = context.GetAllLastochkas().Find(x => x.Id == TrainID).MarIP;
+                SSH s = new SSH();
+                s.ChangeInterfaceSettings(hostIP, Interface, DiscoveredIP, AccessIP);
+                return s.ChangeInterfaceSettings(hostIP, Interface, DiscoveredIP, AccessIP);
+            }
         }
     }
 }

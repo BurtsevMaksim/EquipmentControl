@@ -43,6 +43,10 @@
       "frameworks": {
         "netcoreapp2.1": {
           "dependencies": {
+            "EntityFramework": {
+              "target": "Package",
+              "version": "[6.3.0, )"
+            },
             "Microsoft.AspNetCore.App": {
               "suppressParent": "All",
               "target": "Package",
@@ -66,6 +70,18 @@
             "Microsoft.VisualStudio.Web.CodeGeneration.Design": {
               "target": "Package",
               "version": "[2.1.9, )"
+            },
+            "MySql.Data": {
+              "target": "Package",
+              "version": "[8.0.17, )"
+            },
+            "MySql.Data.Entity": {
+              "target": "Package",
+              "version": "[6.10.9, )"
+            },
+            "MySql.Data.EntityFrameworkCore": {
+              "target": "Package",
+              "version": "[8.0.17, )"
             },
             "SSH.NET": {
               "target": "Package",

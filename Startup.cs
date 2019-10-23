@@ -33,11 +33,11 @@ namespace EquipmentControl
                 options.MinimumSameSitePolicy = SameSiteMode.None;
             });
 
-            services.AddDbContext<LastochkaContext>(options =>
-            options.UseSqlServer(Configuration.GetConnectionString("LastochkaContext")));
-
+            //services.AddDbContext<LastochkaContext>(options =>
+            //options.UseSqlServer(Configuration.GetConnectionString("LastochkaContext")));
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
+            services.Add(new ServiceDescriptor(typeof(LastochkaContext), new LastochkaContext(Configuration.GetConnectionString("DefaultConnection"))));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -61,7 +61,7 @@ namespace EquipmentControl
             {
                 routes.MapRoute(
                     name: "default",
-                    template: "{controller=Home}/{action=Index}/{id?}");
+                    template: "{controller=Home}/{action=LastochkasList}/{id?}");
             });
         }
     }
